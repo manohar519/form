@@ -1,37 +1,31 @@
 
 import React, { useState } from 'react'
 import { Grid, TextField, Button } from '@mui/material'
-//import { makeStyles } from '@mui/material';
-
-
-
-
-
-
+import axios from 'axios';
 
 
 export default function Form() {
-    const initialValues={
+    const url = ""
+    const initialValues = {
         fullName: "",
         email: "",
         mobile: "",
-        contactNumber:"",
-        fatherName:"",
-        fatherNumber:"",
-        dob:"",
-        bloodGroup:"",
-        checkInDate:"",
-        occupation:"",
-        workAddrress:"",
-        workNumber:"",
-        permanentAddress:"",
-        idProof:"",
-        roomRent:"",
-        securityDeposit:"",
-        transactionId:"",
-        signOfResident:"",
-        signofManager:"",
-        //hireDate: new Date(),
+        contactNumber: "",
+        fatherName: "",
+        fatherNumber: "",
+        dob: "",
+        bloodGroup: "",
+        checkInDate: "",
+        occupation: "",
+        workAddrress: "",
+        workNumber: "",
+        permanentAddress: "",
+        idProof: "",
+        roomRent: "",
+        securityDeposit: "",
+        transactionId: "",
+        signOfResident: "",
+        signofManager: "",
     };
 
     const [values, setValues] = useState(initialValues);
@@ -42,42 +36,50 @@ export default function Form() {
         })
     }
     const handleSubmit = (e) => {
-            e.preventDefault();
-            console.log("InputFields", values);
-            setValues({
-                fullName: "",
-                email: "",
-                mobile: "",
-                contactNumber:"",
-                fatherName:"",
-                fatherNumber:"",
-                dob:"",
-                bloodGroup:"",
-                checkInDate:"",
-                occupation:"",
-                workAddrress:"",
-                workNumber:"",
-                permanentAddress:"",
-                idProof:"",
-                roomRent:"",
-                securityDeposit:"",
-                transactionId:"",
-                signOfResident:"",
-                signofManager:"",
-            });
-         
+        e.preventDefault();
+        axios.post(url, {
+            fullName: values.fullName,
+            fatherName: values.fatherName
+        })
+            .then(res => {
+                console.log(res.values)
+            })
+        console.log("InputFields", values);
+
+        setValues({
+            fullName: "",
+            email: "",
+            mobile: "",
+            contactNumber: "",
+            fatherName: "",
+            fatherNumber: "",
+            dob: "",
+            bloodGroup: "",
+            checkInDate: "",
+            occupation: "",
+            workAddrress: "",
+            workNumber: "",
+            permanentAddress: "",
+            idProof: "",
+            roomRent: "",
+            securityDeposit: "",
+            transactionId: "",
+            signOfResident: "",
+            signofManager: "",
+        });
+
     };
-   
-   
+
+
 
 
 
 
     return (
 
-        <form>
+        <form onSubmit={handleSubmit}>
             <h3>Admission Form</h3>
-            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            <Grid container rowSpacing={1} >
                 <Grid item xs={6} >
                     <TextField
                         variant="standard"
@@ -93,6 +95,7 @@ export default function Form() {
                     <TextField
                         variant="standard"
                         label="ContactNumber"
+                        type="number"
                         name="contactNumber"
                         value={values.contactNumber}
                         onChange={handleInputChange} />
@@ -115,8 +118,9 @@ export default function Form() {
                 </Grid>
                 <Grid item xs={6}>
                     <TextField
-                        variant="standard"
-                        label="DOB"
+                        variant="outlined"
+                        label="Date of Birth"
+                        type="date"
                         name="dob"
                         value={values.dob}
                         onChange={handleInputChange} />
@@ -131,9 +135,10 @@ export default function Form() {
                 </Grid>
                 <Grid item xs={6}>
                     <TextField
-                        variant="standard"
-                        label="Check In Date"
+                        variant="outlined"
                         name="checkInDate"
+                        label="Check In Date"
+                        type="date"
                         value={values.checkInDate}
                         onChange={handleInputChange} />
                 </Grid>
@@ -169,7 +174,7 @@ export default function Form() {
                         value={values.workNumber}
                         onChange={handleInputChange} />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={6} >
                     <TextField
                         variant="standard"
                         label="Permanent Address"
@@ -180,19 +185,12 @@ export default function Form() {
                 <Grid item xs={6}>
                     <TextField
                         variant="standard"
-                        label="ID Proof"
+                        margin='normal'
+                        type="file"
                         name="idProof"
                         value={values.idProof}
                         onChange={handleInputChange} />
-                    <Button
-                        component="label"
-                    >
-                        Upload File
-                        <input
-                            type="file"
-                            hidden
-                        />
-                    </Button>
+
 
                 </Grid>
                 <Grid item xs={6}>
