@@ -2,6 +2,8 @@
 import React, { useState } from 'react'
 import { Grid, TextField, Button } from '@mui/material'
 import axios from 'axios';
+import Payments from './Payment'
+
 
 
 export default function Form() {
@@ -9,7 +11,6 @@ export default function Form() {
     const initialValues = {
         fullName: "",
         email: "",
-        mobile: "",
         contactNumber: "",
         fatherName: "",
         fatherNumber: "",
@@ -49,7 +50,6 @@ export default function Form() {
         setValues({
             fullName: "",
             email: "",
-            mobile: "",
             contactNumber: "",
             fatherName: "",
             fatherNumber: "",
@@ -111,7 +111,7 @@ export default function Form() {
                 <Grid item xs={6}>
                     <TextField
                         variant="standard"
-                        label="Contact Number"
+                        label="Father Contact Number"
                         name="fatherNumber"
                         value={values.fatherNumber}
                         onChange={handleInputChange} />
@@ -119,8 +119,9 @@ export default function Form() {
                 <Grid item xs={6}>
                     <TextField
                         variant="outlined"
-                        label="Date of Birth"
+                        helperText="DOB"
                         type="date"
+
                         name="dob"
                         value={values.dob}
                         onChange={handleInputChange} />
@@ -137,7 +138,7 @@ export default function Form() {
                     <TextField
                         variant="outlined"
                         name="checkInDate"
-                        label="Check In Date"
+                        helperText="Check In Date"
                         type="date"
                         value={values.checkInDate}
                         onChange={handleInputChange} />
@@ -186,8 +187,10 @@ export default function Form() {
                     <TextField
                         variant="standard"
                         margin='normal'
+                        helperText="ID Proof"
                         type="file"
                         name="idProof"
+                        inputProps={{ style: { fontSize: 10 } }}
                         value={values.idProof}
                         onChange={handleInputChange} />
 
@@ -233,6 +236,10 @@ export default function Form() {
                         value={values.signofManager}
                         onChange={handleInputChange} />
                 </Grid>
+                <Grid item xs={6}>
+                   <Payments />
+                </Grid>
+
 
             </Grid>
             <Button variant="contained" onClick={handleSubmit}>Submit</Button>
